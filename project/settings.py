@@ -11,16 +11,20 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+# Initialise environment variables
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h(dllaa7k*=cx!z)!ejs1+8u#q&p21%tp2###_tg!x5&+aj&w7'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #!--------------
+    'rest_framework',
+    #!--------------
     'processManager',
     'core',
 ]
@@ -75,12 +82,19 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE'   : os.getenv('ENGINE'),
+        'NAME'     : os.getenv('NAME'),
+        'USER'     : os.getenv('USER'),
+        'PASSWORD' : os.getenv('PASSWORD'),
+        'HOST'     : os.getenv('HOST'),
+        'PORT'     : os.getenv('PORT'),
     }
 }
+
+
 
 
 # Password validation
@@ -126,3 +140,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTh_USER_MODEL = 'core.User'
+
+
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
