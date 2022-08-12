@@ -13,7 +13,7 @@ class ProcessSerializer(serializers.ModelSerializer):
     user = UserSerailizerReadOnly(read_only=True)
     class Meta:
         model = Process
-        fields = ['user', 'process_time_sec', 'created_at']
-        read_only_fields = ['created_at', 'user']
+        fields = ['user', 'process_time_sec', 'created_at', 'status', 'HRRN']
+        read_only_fields = ['created_at', 'user', 'status', 'HRRN']
 
 
