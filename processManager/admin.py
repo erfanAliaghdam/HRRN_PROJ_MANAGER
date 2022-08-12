@@ -17,5 +17,5 @@ class ProcessAdmin(admin.ModelAdmin):
             return format_html('''<progress value="30" max="100"></progress>
                                 <span style="font-weight:bold">30%</span>''')
         elif obj.status == Process.FINISHED:
-            return format_html('''<progress value="100" max="100"></progress>
+            return format_html('''<progress value="100" max="100" ></progress>
                                 <span style="font-weight:bold">100%</span>''')
