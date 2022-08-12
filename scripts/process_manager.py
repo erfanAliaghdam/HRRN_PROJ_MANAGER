@@ -2,7 +2,7 @@ from processManager.models import Process
 from django.utils import timezone
 import time
 
-
+#! NOTE : this extension is for checking pending processes.
 def run():
     while True:
         if Process.objects.filter(status=Process.PENDING).count() > 0:

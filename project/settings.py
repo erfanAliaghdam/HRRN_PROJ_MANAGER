@@ -18,6 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 from dotenv import load_dotenv
 import os
+from datetime import timedelta
 
 load_dotenv()
 # Quick-start development settings - unsuitable for production
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     #!--------------
     'rest_framework',
     'django_extensions',
+    'djoser',
     #!--------------
     'processManager',
     'core',
@@ -140,7 +142,30 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AUTh_USER_MODEL = 'core.User'
+
+
+#! --------REST_FRAMEWORK----------
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+}
+#! --------DJOSER--------------
+DJOSER = {
+    'LOGIN_FIELD': 'email',
+    'USERNAME_FIELD': 'email',
+}
+#! --------SIMPLE_JWT----------
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT',),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=int(os.getenv('ACCESS_TOKEN_LIFETIME_BY_DAYS'), 10)),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=int(os.getenv('REFRESH_TOKEN_LIFETIME_BY_DAYS', 10))),
+}
+
+AUTH_USER_MODEL = 'core.User'
 
 
 
