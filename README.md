@@ -48,7 +48,7 @@ Command to run the project:
 Command for running process manager script:
 > python manage.py runscript process_manager
 
-now you can login with jwt and make process with this endpoint :
+now you can login with jwt(you can use mod header extension)  and make process with this endpoint :
 > http://localhost:8000/api/process
 
 you can see progress of each process in admin panel :
